@@ -10,6 +10,9 @@ public class TestJubilado {
 
     static Scanner entrada = new Scanner(System.in);
     static ArrayList<Jubilado> jubilados = new ArrayList<>();
+    static ArrayList<String> jubiladoV =new ArrayList<>();
+    static ArrayList<String> jubiladoD =new ArrayList<>();
+    static ArrayList<String> jubiladoP =new ArrayList<>();
 
     public static void main(String[] args) {
         int op = 0;        
@@ -25,18 +28,46 @@ public class TestJubilado {
                 nombres = entrada.nextLine();
                 System.out.print("Anios Aporte:  ");
                 anios = entrada.nextInt();
-                datos(op, cedula, nombres, anios);
+                datos(op, cedula, nombres,anios);
                 
             }
-            if(op==4){
-                for(Jubilado jub:jubilados){
+            if (op == 4) {
+                for (Jubilado jub : jubilados) {
                     jub.calculaPensioni();
                     jub.calcularPension();
-                    if(jub instanceof JubiladoPatron){
+                    if (jub instanceof JubiladoPatron) {
                         ((JubiladoPatron) jub).bonoSueldo();
+                        jubiladoP.add(((JubiladoPatron) jub).toString());
                     }
-                    System.out.println(jub);
+                    
+                    if (jub instanceof JubiladoDiscapacidad){
+                        jubiladoD.add(((JubiladoDiscapacidad) jub).toString());
+                    }
+                        
+                    if (jub instanceof JubiladoVejez) {
+                      jubiladoV.add(((JubiladoVejez) jub).toString());
+                    }
                 }
+                System.out.println("----------------------------------------------");
+                System.out.println("\n||Jubilados por Vejez||\n");
+                for (String jv : jubiladoV) {
+                    System.out.println(jv);
+                }
+                
+                System.out.println("----------------------------------------------");
+                System.out.println("\n||Jubilados por Discapacidad||\n");
+                for (String jd : jubiladoD) {       
+                    System.out.println(jd);
+                }
+                
+                System.out.println("----------------------------------------------");
+                System.out.println("\n||Jubilados Patronal||\n");
+                for (String jp : jubiladoP) {
+                    System.out.println(jp);
+                }
+
+
+                
             }
         } while (op != 5);
     }
@@ -53,7 +84,7 @@ public class TestJubilado {
         int tipo;
         switch (op) {
             case 1:
-                jubilados.add(new JubiladoVejez(cedula, nombres, anios));                
+                jubilados.add(new JubiladoVejez(cedula, nombres, anios));               
                 break;
             case 2:
                 System.out.print("Porcentaje de discapacidad: ");
@@ -66,6 +97,9 @@ public class TestJubilado {
                 System.out.print("Tipo Empresa <<1>> publica <<2>> privada ");
                 tipo = entrada.nextInt();
                 jubilados.add(new JubiladoPatron(cedula, nombres, anios, porcentaje, tipo));
+                         
         }
     }
+    
+
 }
