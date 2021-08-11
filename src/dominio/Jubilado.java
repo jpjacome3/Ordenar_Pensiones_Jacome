@@ -53,7 +53,7 @@ public abstract class Jubilado {
 
     @Override
     public String toString(){
-        return this.cedula+"  "+this.nombres+"  "+this.aniosAporte+"   "+this.pesioni;
+        return "Cedula: "+this.cedula+"\nNombre: "+this.nombres+"\nAnios de aporte: "+this.aniosAporte+"\nPension Inicial: "+this.pesioni;
     }
     
     
